@@ -11,4 +11,11 @@ target_include_directories(zte-core PUBLIC include)
 
 target_link_libraries(zte-core PUBLIC Qt6::Core Qt6::Network)
 
+install(TARGETS zte-core
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION bin
+    INCLUDES DESTINATION include
+)
+
 # ponytail: minimal deps, no Quick here — keeps core headless testable

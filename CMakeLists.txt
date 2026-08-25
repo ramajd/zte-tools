@@ -9,6 +9,11 @@ set(CMAKE_AUTORCC ON)
 option(ZTE_BUILD_TESTS "Build tests" ON)
 option(ZTE_BUILD_APP "Build GUI app (requires Qt6 Quick)" ON)
 
+# Install prefix default
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/install" CACHE PATH "Install prefix" FORCE)
+endif()
+
 find_package(Qt6 REQUIRED COMPONENTS Core Network)
 if(ZTE_BUILD_APP)
     find_package(Qt6 REQUIRED COMPONENTS Quick Qml)
@@ -26,3 +31,15 @@ if(ZTE_BUILD_TESTS)
     enable_testing()
     add_subdirectory(tests)
 endif()
+
+# CPack configuration for distributable packages
+include(InstallRequiredSystemLibraries)
+set(CPACK_PACKAGE_NAME "${PROJECT_NAME}")
+set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "ZTE Tools - Modem management utility")
+set(CPACK_PACKAGE_VENDOR "ZTE Tools Contributors")
+set(CPACK_GENERATOR "ZIP")
+if(WIN32)
+    set(CPACK_GENERATOR "ZIP;NSIS")
+endif()
+include(CPack)

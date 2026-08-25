@@ -26,4 +26,26 @@ qt_add_qml_module(zte-gui
 target_include_directories(zte-gui PRIVATE src)
 target_link_libraries(zte-gui PRIVATE zte-core Qt6::Quick Qt6::Qml Qt6::Core Qt6::Network)
 
+# Install target for standalone distributable
+install(TARGETS zte-gui
+    RUNTIME DESTINATION bin
+    BUNDLE DESTINATION .
+    LIBRARY DESTINATION lib
+)
+
+# Ship Qt runtime deps (DLLs, plugins, QML modules) alongside the exe at install time
+if(COMMAND qt_generate_deploy_qml_app_script)
+    qt_generate_deploy_qml_app_script(
+        TARGET zte-gui
+        OUTPUT_SCRIPT zte_gui_deploy_script
+    )
+    install(SCRIPT ${zte_gui_deploy_script})
+elseif(COMMAND qt_generate_deploy_app_script)
+    qt_generate_deploy_app_script(
+        TARGET zte-gui
+        OUTPUT_SCRIPT zte_gui_deploy_script
+    )
+    install(SCRIPT ${zte_gui_deploy_script})
+endif()
+
 # ponytail: single executable, no plugin — QML embedded, fastest load
