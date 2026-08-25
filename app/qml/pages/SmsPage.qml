@@ -4,6 +4,7 @@ import QtQuick.Controls
 
 Item {
     property var svc
+    Timer { id: deferSms; interval: 400; running: true; repeat: false; onTriggered: list.model = svc.smsMessages(1,10) }
     ColumnLayout {
         anchors.fill: parent; anchors.margins: 16; spacing: 8
         RowLayout {
@@ -15,7 +16,7 @@ Item {
             id: list
             Layout.fillWidth: true; Layout.fillHeight: true; Layout.preferredHeight: 300
             clip: true
-            model: svc.smsMessages(1,10)
+            model: [] // ponytail: defer blocking fetch; was svc.smsMessages() which froze startup 8s
             delegate: Frame {
                 width: ListView.view.width
                 ColumnLayout {

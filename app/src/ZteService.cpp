@@ -33,7 +33,7 @@ void ZteService::refresh() {
 }
 void ZteService::setPolling(bool on, int intervalMs) {
     m_poll.setInterval(intervalMs);
-    if (on) { refresh(); m_poll.start(); } else m_poll.stop();
+    if (on) { QTimer::singleShot(500, this, &ZteService::refresh); m_poll.start(); } else m_poll.stop();
 }
 bool ZteService::connectWan(){ setBusy(true); bool ok=m_client.connectWan(); setBusy(false); if(!ok) setError("connect failed"); return ok; }
 bool ZteService::disconnectWan(){ setBusy(true); bool ok=m_client.disconnectWan(); setBusy(false); if(!ok) setError("disconnect failed"); return ok; }

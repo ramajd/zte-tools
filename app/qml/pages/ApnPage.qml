@@ -4,6 +4,7 @@ import QtQuick.Controls
 
 Item {
     property var svc
+    Timer { id: deferApn; interval: 300; running: true; repeat: false; onTriggered: list.model = svc.apnProfiles() }
     ColumnLayout {
         anchors.fill: parent; anchors.margins: 16; spacing: 8
         RowLayout {
@@ -14,7 +15,7 @@ Item {
             id: list
             Layout.fillWidth: true; Layout.fillHeight: true
             clip: true
-            model: svc.apnProfiles()
+            model: [] // ponytail: defer blocking fetch; was svc.apnProfiles() which froze startup 8s
             delegate: Frame {
                 width: ListView.view.width
                 RowLayout {
