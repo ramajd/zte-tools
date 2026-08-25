@@ -3,6 +3,13 @@ qt_add_executable(zte-gui
     src/ZteService.cpp
     src/ZteService.h
 )
+# Finder double-click on bare Mach-O does nothing (no Terminal, no log) — bundle fixes it
+set_target_properties(zte-gui PROPERTIES
+    MACOSX_BUNDLE TRUE
+    MACOSX_BUNDLE_GUI_IDENTIFIER "io.github.ramajd.zte.tools"
+    MACOSX_BUNDLE_BUNDLE_NAME "ZTE Tools"
+    WIN32_EXECUTABLE TRUE
+)
 
 qt_add_qml_module(zte-gui
     URI ZteTools
