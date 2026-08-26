@@ -24,7 +24,8 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
-          version: '6.11.*'
+          # 6.11.2 (2026-08-18): Updates.xml not yet synced on aqt mirrors; bump once it is
+          version: '6.11.1'
           cache: true
 
       - name: Configure
