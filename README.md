@@ -15,7 +15,7 @@ docs/  — API_MAPPING, ARCHITECTURE
 
 ## Build
 
-Requires Qt 6.5+ (Qt 6.8 LTS recommended), CMake 3.21+, Ninja.
+Requires Qt 6.5+ (Qt 6.11 LTS recommended), CMake 3.21+, Ninja.
 
 ```bash
 brew install qt@6 ninja  # macOS; ensure Qt6_DIR or PATH
