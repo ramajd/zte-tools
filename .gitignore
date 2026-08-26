@@ -15,3 +15,4 @@ DS_Store
 .vscode/
 *.pro.user
 .cache/
+__cmake_systeminformation/
