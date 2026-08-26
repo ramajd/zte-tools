@@ -66,6 +66,17 @@ jobs:
           Categories=Utility;
           EOF
 
+      - name: Create placeholder icon
+        if: runner.os == 'Linux'
+        run: |
+          mkdir -p AppDir/usr/share/icons/hicolor/scalable/apps
+          cat > AppDir/usr/share/icons/hicolor/scalable/apps/zte-gui.svg << 'SVG'
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+            <rect width="128" height="128" rx="16" fill="#1976D2"/>
+            <text x="64" y="78" text-anchor="middle" font-size="48" font-family="sans-serif" font-weight="bold" fill="white">ZTE</text>
+          </svg>
+          SVG
+
       - name: Download linuxdeploy
         if: runner.os == 'Linux'
         run: |
