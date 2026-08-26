@@ -21,6 +21,12 @@ endif()
 qt_standard_project_setup(REQUIRES 6.5)
 qt_policy(SET QTP0004 NEW)
 
+# AGL framework was removed in macOS SDK 14+ but Qt 6 still links it —
+# target the 13.0 linker SDK to keep it available at link time.
+if(APPLE)
+    add_link_options(-Wl,-sdk_version,13.0)
+endif()
+
 add_subdirectory(core)
 
 if(ZTE_BUILD_APP)
