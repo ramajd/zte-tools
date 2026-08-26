@@ -51,7 +51,7 @@ jobs:
       # ── Linux AppImage ─────────────────────────────────────────────
       - name: Install to AppDir
         if: runner.os == 'Linux'
-        run: cmake --install build/release --prefix AppDir/usr
+        run: cmake --install build/release --prefix "$PWD/AppDir/usr"
 
       - name: Create .desktop entry
         if: runner.os == 'Linux'
